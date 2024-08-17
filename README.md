@@ -41,10 +41,10 @@ Follow these steps to run the code:
 
 ### Run the Python Script:
 
-1. Execute the a_star_suhas_swaraj.py file by running the following command in your terminal:
+1. Execute the Proj3_suhas_swaraj.py file by running the following command in your terminal:
 
 ```bash
-python3 a_star_suhas_swaraj.py
+python3 Proj3_suhas_swaraj.py
 ```
 2. The script will prompt you to input the step size, robot radius, clearance, coordinates and orientation for the initial and goal nodes.
 3. Ensure that the entered coordinates are valid within the environment.
