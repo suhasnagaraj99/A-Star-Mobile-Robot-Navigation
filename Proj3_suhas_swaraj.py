@@ -1,9 +1,17 @@
+''' 
+Changes made for optimization:
+1. In line 333, some lines of code have removed out as it was not optimal: Instead of using a for loop, I have used array to check if the node has been explored.
+2. Removed heapq.heapify which was used at multiple locations in the code. 
+3. Animation has been sped up (But the path gets generated in around 5 minutes, even without this change)
+'''
+
 import pygame
 import numpy as np
 import heapq
 import time
 import math
 from sortedcollections import OrderedSet
+import vidmaker
 
 # initialising the map with all values as inf
 map=np.full((1200, 500), np.inf)
@@ -334,7 +342,9 @@ while searching:
 
 pygame.init()
 screen = pygame.display.set_mode((1200, 500))
-while True:
+running = True
+while running:
+    video = vidmaker.Video("a_star_swaraj_suhas.mp4", late_export=True)
     # Indexing for skipping the first value, a dummy value which we added earlier
     n=0
     m=0
@@ -363,6 +373,7 @@ while True:
         pygame.draw.line(screen, (255,150,140), (x_previous, 500-y_previous), (x_current,500-y_current),1)
         a+=1
         if a%1000==0:
+            video.update(pygame.surfarray.pixels3d(screen).swapaxes(0, 1), inverted=False)
             pygame.display.update()
     path=final_node[1] 
     for i in range(len(path)-1):
@@ -373,10 +384,16 @@ while True:
         
         (x2,y2,_)=path[i+1]
         pygame.draw.line(screen, (0,0,0), (x1,500-y1),(x2,500-y2),2)
+        video.update(pygame.surfarray.pixels3d(screen).swapaxes(0, 1), inverted=False)
         
     x3,y3,_=path[-1]
     x4, y4, _, _, _ = final_node[0]
     pygame.draw.line(screen, (0,0,0), (x3,500-y3),(x4,500-y4),2)
+    video.update(pygame.surfarray.pixels3d(screen).swapaxes(0, 1), inverted=False)
     pygame.display.update()
     time.sleep(10)
+    for _ in range(10 * 60):
+        video.update(pygame.surfarray.pixels3d(screen).swapaxes(0, 1), inverted=False)
+    running = False
 pygame.quit()
+video.export(verbose=True)
