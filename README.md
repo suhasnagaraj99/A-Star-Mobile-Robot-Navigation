@@ -3,6 +3,8 @@
 ## Project Description
 This repository contains the implementation of the A* Algorithm for mobile robot navigation, developed as part of ENPM661 Project 3 Phase 1.
 
+![Video GIF](https://github.com/suhasnagaraj99/A-Star-Mobile-Robot-Navigation/blob/main/a_star.gif)
+
 ## Assumptions and Map Description
 - The robot is assumed to be a mobile robot with some radius.
 - The robot clearance is given as input
